@@ -7,8 +7,17 @@ function Likes(props) {
     console.log('props', props)
     return (
         <div className="button-controls">
-            <button>❤ {props.likes}</button>
-            <button>Dislike</button>
+            <button
+                onClick={props.onIncremetLikes}
+            >
+                ❤ 
+            {props.likes}
+            </button>
+            <button 
+                onClick={props.onDecremetLikes}
+            >
+                Dislike
+            </button>
         </div>
     )
 }
@@ -16,8 +25,9 @@ function Likes(props) {
 
 function mapStateToProps(state) {
     console.log('mapStateToProps > ', state)
+    const { likes } = state;
     return {
-        likes: state.likes
+        likes: likes.likes
     }
     // передаем state.likes в пропсы, (likes: 8)
     // mapStateToProps принимает состояние state из redux,
@@ -27,7 +37,27 @@ function mapStateToProps(state) {
     // наш компонент используя наш объект props "mapStateToProps(state)"
 }
 
-export default connect(mapStateToProps)(Likes);
+function mapDispathToProps(dispatch) {
+    return {
+        onIncremetLikes: () => {
+            console.log('click')
+            const action = {type: 'INCREMENT'}
+            // tip akshena {type: 'INCREMENT'}
+            dispatch(action)
+            // dispatch zapuskaet action
+        },
+        onDecremetLikes: () => {
+            console.log('click decrement')
+            const action = {type: 'DECREMENT'}
+            dispatch(action)
+        }
+    }
+    // actions - это объекты в redux, которые содержат свойства tipe
+    // это тип action и свойства в которые могут передаваться какие-то
+    // данные
+}
+
+export default connect(mapStateToProps, mapDispathToProps)(Likes);
     // используем функцию (connect) чтобы интегрировать
     // и соединить (mapStateToProps) с нашим компонентом(likes)
 
