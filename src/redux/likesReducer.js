@@ -1,9 +1,13 @@
-// import { combineReducers } from "redux";
-// import { likesReducer } from "./likesReducer"
+// like recuer
+
 import { INCREMENT, DECREMENT } from "./types";
 
-export const rootReducer = (state, action) => {
-    console.log('likesReducer > ', action)
+const initialState = {
+    likes: 0
+}
+
+
+export const likesReducer = (state = initialState, action) => {
     
     switch(action.type) {
         case INCREMENT:

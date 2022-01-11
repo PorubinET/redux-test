@@ -1,5 +1,9 @@
 import './App.css';
-import Likes from './likes';
+import Likes from './Likes';
+import Title from './Title';
+import Comments from './Comments';
+
+
 
 
 function App() {
@@ -9,10 +13,10 @@ function App() {
         <div className="card">
           <div className="card-image">
             <img src="./sea.jpg" alt="surfing"/>
-            <Likes
-              store={store}
-            />
+            <Title/>
+            <Likes/>
           </div>
+          <Comments/>
         </div>
       </div>
     </div>

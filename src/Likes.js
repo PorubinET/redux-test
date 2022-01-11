@@ -1,10 +1,13 @@
+// компонент likes
+
 import { connect } from 'react-redux' 
 // соединяем react с redux
-
+import { incrementLikes, decrementLikes} from './redux/actions'
 
 function Likes(props) {
 
-    console.log('props', props)
+        console.log('props', props)
+
     return (
         <div className="button-controls">
             <button
@@ -24,11 +27,12 @@ function Likes(props) {
 
 
 function mapStateToProps(state) {
-    console.log('mapStateToProps > ', state)
-    const { likes } = state;
+
+    const { likesReducer } = state;
     return {
-        likes: likes.likes
+        likes: likesReducer.likes
     }
+    // пробрасываем состояние хранилища redux в компонент, используя функцию mapStateToProps
     // передаем state.likes в пропсы, (likes: 8)
     // mapStateToProps принимает состояние state из redux,
     // берет состояние state.likes и передеаем его в пропсы
@@ -37,20 +41,16 @@ function mapStateToProps(state) {
     // наш компонент используя наш объект props "mapStateToProps(state)"
 }
 
+    // пробрасываем состояние хранилища redux в компонент, используя функцию mapDispathToProps
 function mapDispathToProps(dispatch) {
     return {
-        onIncremetLikes: () => {
-            console.log('click')
-            const action = {type: 'INCREMENT'}
+        onIncremetLikes: () => {dispatch(incrementLikes())},
+        onDecremetLikes: () => {dispatch(decrementLikes())}
+            // console.log('click')
+            // const action = {type: 'INCREMENT'}
             // tip akshena {type: 'INCREMENT'}
-            dispatch(action)
+            // dispatch(action)
             // dispatch zapuskaet action
-        },
-        onDecremetLikes: () => {
-            console.log('click decrement')
-            const action = {type: 'DECREMENT'}
-            dispatch(action)
-        }
     }
     // actions - это объекты в redux, которые содержат свойства tipe
     // это тип action и свойства в которые могут передаваться какие-то
@@ -58,6 +58,7 @@ function mapDispathToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispathToProps)(Likes);
+    // подключаем этот компонент к приложению, используя функцию (connect)
     // используем функцию (connect) чтобы интегрировать
     // и соединить (mapStateToProps) с нашим компонентом(likes)
 
